@@ -1,3 +1,4 @@
+
 #Node on the WikiTree
 class Node:
 	#Nodes contain a page title and children (links)
@@ -8,13 +9,9 @@ class Node:
 	def getTitle(self):
 		return self.title
 	#Takes in same arguments as a constructor, adds as child
-	def addChild(self, childName, children):
+	def addChild(self, childName, children, tree):
 		newChild = Node(childName, children)
 		self.children.append(newChild)
-	#Writes wiki tree to xml file, placefolder for testing
-	def listChildren(self, f):
-		output = self.getTitle() + "'s children: "
-		for child in self.children:
-			output += child.getTitle() + ","
-		output += "\n\n"
-		f.write(output.encode())
+		#print("New edge from " + self.getTitle() + " -> " + newChild.getTitle())
+		tree.graph.add_edge(self.getTitle(), newChild.getTitle())
+
